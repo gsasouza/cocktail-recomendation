@@ -19,7 +19,7 @@ export default function Home({ cocktails }) {
     if (selected) router.push(`/recommend/${selected}`)
   }
   return (
-    <div className={{ overflow: 'hidden' }}>
+    <div style={{ overflow: 'hidden' }}>
       <Head>
         <title>Cocktail Recommendation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
