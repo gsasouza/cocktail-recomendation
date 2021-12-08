@@ -13,7 +13,8 @@ const RecommendPage = (props) => {
     <div>
       <Head>
         <title>Recommendations for {cocktail.name}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link rel="icon" href="/favicon.ico"/>
       </Head>
 
