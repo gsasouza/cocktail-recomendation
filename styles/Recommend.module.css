@@ -1,9 +1,11 @@
 .backBar {
-    margin: 2.2rem auto 2rem 1rem;
+    margin: 2.2rem auto 2rem 0;
 }
 
 .main {
+    max-width: 500px;
     min-height: 100vh;
+    margin: auto;
     padding: 0 1rem;
     flex: 1;
     display: flex;
@@ -23,7 +25,6 @@
     font-size: 12px;
     color: #798184;
     margin-right: auto;
-    margin-left: 1rem;
     margin-top: -0.5rem;
 }
 
@@ -42,9 +43,6 @@
     padding: 1rem 1rem 0.5rem 1rem;
 }
 
-.title {
-    margin-left: 1rem;
-}
 
 .image {
     border-radius: 10px;
