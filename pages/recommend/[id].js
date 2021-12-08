@@ -7,13 +7,14 @@ import client, { COCKTAIL_COLLECTIONS, DB_NAME } from "../../lib/db";
 import styles from "../../styles/Recommend.module.css";
 
 const RecommendPage = (props) => {
+  if (!props.cocktail) return null;
   const cocktail = JSON.parse(props.cocktail)
   const recommendedCocktails = JSON.parse(props.recommendedCocktails)
   return (
     <div>
       <Head>
         <title>Recommendations for {cocktail.name}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <link rel="icon" href="/favicon.ico"/>
       </Head>
@@ -52,21 +53,32 @@ const RecommendPage = (props) => {
   )
 }
 
-export async function getServerSideProps({ query }) {
+export async function getStaticProps({ params }) {
   await client.connect()
-  const { id } = query;
+  const { id } = params;
   const response = await fetch(`https://drinks-project.herokuapp.com/${id}`);
   const { recommendations } = await response.json();
-  const [cocktail, recommendedCocktails] = await Promise.all([
+  console.log(id)
+  const [cocktail = {}, recommendedCocktails = []] = await Promise.all([
     client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).findOne({ cocktailDbId: id }),
     client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find({ cocktailDbId: { $in: recommendations } }).toArray()])
 
   return {
     props: {
-      cocktail: JSON.stringify(cocktail),
+      cocktail: JSON.stringify(cocktail) ,
       recommendedCocktails: JSON.stringify(recommendedCocktails)
     }
   }
+}
+
+export async function getStaticPaths() {
+  await client.connect()
+  const response = await client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find().toArray()
+  console.log(response);
+  return {
+    paths: response.map(({ cocktailDbId }) => ({ params: { id: cocktailDbId } } )),
+    fallback: true
+  };
 }
 
 
