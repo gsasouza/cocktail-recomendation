@@ -42,7 +42,7 @@ const Recipe = (props) => {
             </h2>
           </div>
           <ul>
-            {cocktail.items.map(item => <li className={styles.instructionsList}>{item}</li>)}
+            {cocktail.items.map(item => <li key={item} className={styles.instructionsList}>{item}</li>)}
           </ul>
 
           <div className={styles.instructionsTitle} style={{ marginTop: '2rem' }}>
