@@ -8,12 +8,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1;
 }
 
 .content {
   flex: 0.7;
   width: 100%;
+  z-index: 1;
 }
 
 .inputColumn {
