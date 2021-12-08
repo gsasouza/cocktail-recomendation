@@ -114,3 +114,8 @@
     flex-direction: column;
   }
 }
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+}
