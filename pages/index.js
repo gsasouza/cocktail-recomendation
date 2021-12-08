@@ -55,6 +55,7 @@ export default function Home({ cocktails }) {
       <div className={styles.imageContainer}>
         <Image src="/footer.png" layout='fill'
                objectFit='cover' alt='cocktail'/>
+        
 
       </div>
     </div>
