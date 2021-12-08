@@ -103,7 +103,7 @@ export async function getServerSideProps({ query }) {
     [strMeasure14, strIngredient14],
     [strMeasure15, strIngredient15],
 
-  ].filter(([_, ingredient]) => Boolean(ingredient)).map(i => i.join(' - '))
+  ].filter(([_, ingredient]) => Boolean(ingredient)).map(i => i.length > 1 ? i.join(' - ') : i.join(''))
   const cocktail = {
     name: strDrink,
     IBA: strIBA,

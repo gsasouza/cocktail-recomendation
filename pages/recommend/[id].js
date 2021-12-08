@@ -58,7 +58,6 @@ export async function getStaticProps({ params }) {
   const { id } = params;
   const response = await fetch(`https://drinks-project.herokuapp.com/${id}`);
   const { recommendations } = await response.json();
-  console.log(id)
   const [cocktail = {}, recommendedCocktails = []] = await Promise.all([
     client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).findOne({ cocktailDbId: id }),
     client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find({ cocktailDbId: { $in: recommendations } }).toArray()])
@@ -74,7 +73,6 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   await client.connect()
   const response = await client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find().toArray()
-  console.log(response);
   return {
     paths: response.map(({ cocktailDbId }) => ({ params: { id: cocktailDbId } } )),
     fallback: true
