@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
@@ -44,9 +45,12 @@ export default function Home({ cocktails }) {
               {options.map(({ name, cocktailDbId }) => (
                 <Option key={cocktailDbId} value={cocktailDbId}>{name}</Option> ))}
             </Select>
-            <Button type="primary" onClick={handleNavigate}>
-              Search
-            </Button>
+            <Link href={`/recommend/${selected}`} passHref>
+              <Button type="primary" onClick={handleNavigate}>
+                Search
+              </Button>
+            </Link>
+
           </div>
         </section>
       </main>
@@ -59,7 +63,7 @@ export default function Home({ cocktails }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await client.connect()
   const cocktails = await client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find().toArray();
   return {
