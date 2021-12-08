@@ -45,11 +45,9 @@ export default function Home({ cocktails }) {
               {options.map(({ name, cocktailDbId }) => (
                 <Option key={cocktailDbId} value={cocktailDbId}>{name}</Option> ))}
             </Select>
-            <Link href={`/recommend/${selected}`} passHref>
-              <Button type="primary" onClick={handleNavigate}>
-                Search
-              </Button>
-            </Link>
+            <Button type="primary" onClick={handleNavigate}>
+              Search
+            </Button>
 
           </div>
         </section>
