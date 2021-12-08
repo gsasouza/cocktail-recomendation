@@ -41,7 +41,7 @@ const Recipe = (props) => {
               Ingredients
             </h2>
           </div>
-          <ul>
+          <ul className={styles.ul}>
             {cocktail.items.map(item => <li key={item} className={styles.instructionsList}>{item}</li>)}
           </ul>
 

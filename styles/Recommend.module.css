@@ -137,3 +137,8 @@
     color: #828282;
     font-weight: 400;
 }
+
+.ul {
+    padding-inline-start: 0;
+    margin-left: 1.5rem;
+}
