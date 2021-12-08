@@ -1,20 +1,60 @@
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/Recommend.module.css";
 import Head from "next/head";
+import Link from 'next/link'
+import Image from 'next/image'
+import { ArrowLeftOutlined, ShoppingCartOutlined, BookOutlined } from '@ant-design/icons'
 import React from "react";
 
 const Recipe = (props) => {
   const cocktail = JSON.parse(props.cocktail)
+  console.log(cocktail)
   return (
     <div className={styles.container}>
       <Head>
         <title>Recipe for {cocktail.name}</title>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-
       <main className={styles.main}>
-        <h2 className={styles.title}>
-          Recipe for {cocktail.name}
-        </h2>
+        <div className={styles.backBar}>
+          <Link href="/">
+            <ArrowLeftOutlined/>
+          </Link>
+        </div>
+        <div className={styles.titleHeader}>
+          <div className={styles.titleRecipe}>
+            <h1>{cocktail.name}</h1>
+            <h4>{cocktail.glass}</h4>
+            <div className={styles.divider}></div>
+            <div className={styles.titleCategory}>{cocktail.alcoholic}</div>
+            <div className={styles.titleCategory}>{cocktail.category}</div>
+          </div>
+          <div className={styles.titleImageRelative}>
+            <div className={styles.titleImage}>
+              <img src={cocktail.image} objectFit="cover" width={200} height={200} style={{ borderRadius: '50%' }}/>
+            </div>
+          </div>
+        </div>
+        <div className={styles.instructions}>
+          <div className={styles.instructionsTitle}>
+            <ShoppingCartOutlined style={{ fontSize: '18px', color: '#201F20' }}/>
+            <h2>
+              Ingredients
+            </h2>
+          </div>
+          <ul>
+            {cocktail.items.map(item => <li className={styles.instructionsList}>{item}</li>)}
+          </ul>
+
+          <div className={styles.instructionsTitle} style={{ marginTop: '2rem' }}>
+            <BookOutlined style={{ fontSize: '18px', color: '#201F20' }}/>
+            <h2>
+              Instructions
+            </h2>
+          </div>
+          <p className={styles.instructionsParagraph}>
+            {cocktail.instructions}
+          </p>
+        </div>
       </main>
     </div>
   )
@@ -26,7 +66,7 @@ export async function getServerSideProps({ query }) {
   const json = await response.json();
 
   const {
-    strDrink, strIBA, strDrinkThumb, strInstructions, strGlass, strCategory,
+    strDrink, strIBA, strDrinkThumb, strAlcoholic, strInstructions, strGlass, strCategory,
     strMeasure1, strIngredient1,
     strMeasure2, strIngredient2,
     strMeasure3, strIngredient3,
@@ -43,6 +83,8 @@ export async function getServerSideProps({ query }) {
     strMeasure14, strIngredient14,
     strMeasure15, strIngredient15,
   } = json.drinks[0]
+
+  console.log(json.drinks[0])
   const items = [
     [strMeasure1, strIngredient1],
     [strMeasure2, strIngredient2],
@@ -60,10 +102,11 @@ export async function getServerSideProps({ query }) {
     [strMeasure14, strIngredient14],
     [strMeasure15, strIngredient15],
 
-  ].filter(([_, ingredient]) => Boolean(ingredient)).map(i => i.join(''))
+  ].filter(([_, ingredient]) => Boolean(ingredient)).map(i => i.join(' - '))
   const cocktail = {
     name: strDrink,
     IBA: strIBA,
+    alcoholic: strAlcoholic,
     image: strDrinkThumb,
     instructions: strInstructions,
     glass: strGlass,

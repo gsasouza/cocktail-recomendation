@@ -1,15 +1,16 @@
 import React from 'react'
-import {useRouter} from 'next/router';
+import Image from 'next/image'
+import { useRouter } from 'next/router';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import {Button, Select, Tooltip} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
-import client, {DB_NAME, COCKTAIL_COLLECTIONS} from "../lib/db";
+import { Button, Select, Tooltip } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import client, { DB_NAME, COCKTAIL_COLLECTIONS } from "../lib/db";
 
-const {Option} = Select;
+const { Option } = Select;
 
-export default function Home({cocktails}) {
+export default function Home({ cocktails }) {
   const router = useRouter();
   const [selected, setSelected] = React.useState(null);
   const options = JSON.parse(cocktails)
@@ -25,27 +26,35 @@ export default function Home({cocktails}) {
       </Head>
 
       <main className={styles.main}>
-        <h2 className={styles.title}>
-          Choose a cocktail you like
-        </h2>
-        <div className="input-row">
-          <Select
-            showSearch
-            style={{width: 200}}
-            placeholder="Select a cocktail"
-            optionFilterProp="children"
-            onChange={setSelected}
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {options.map(({name, cocktailDbId}) => (<Option key={cocktailDbId} value={cocktailDbId}>{name}</Option>))}
-          </Select>
-          <Tooltip title="search">
-            <Button type="primary" shape="circle" icon={<SearchOutlined/>} onClick={handleNavigate}/>
-          </Tooltip>
-        </div>
+        <section className={styles.content}>
+          <h1>
+            Tell me a<br/> cocktail you like
+          </h1>
+          <div className={styles.inputColumn}>
+            <Select
+              showSearch
+              style={{ width: '100%' }}
+              placeholder="Select a cocktail"
+              optionFilterProp="children"
+              onChange={setSelected}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {options.map(({ name, cocktailDbId }) => (
+                <Option key={cocktailDbId} value={cocktailDbId}>{name}</Option> ))}
+            </Select>
+            <Button type="primary" onClick={handleNavigate}>
+              Search
+            </Button>
+          </div>
+        </section>
       </main>
+      <div className={styles.imageContainer}>
+        <Image src="/footer.png" layout='fill'
+               objectFit='cover' alt='cocktail'/>
+
+      </div>
     </div>
   )
 }
@@ -55,7 +64,7 @@ export async function getServerSideProps() {
   const cocktails = await client.db(DB_NAME).collection(COCKTAIL_COLLECTIONS).find().toArray();
   return {
     props: {
-      cocktails: JSON.stringify(cocktails.map(({name, cocktailDbId}) => ({name, cocktailDbId})))
+      cocktails: JSON.stringify(cocktails.map(({ name, cocktailDbId }) => ( { name, cocktailDbId } )))
     }
   }
 }

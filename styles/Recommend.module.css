@@ -1,0 +1,139 @@
+.backBar {
+    margin: 2.2rem auto 2rem 1rem;
+}
+
+.main {
+    min-height: 100vh;
+    padding: 0 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.title {
+    text-align: left;
+    margin-right: auto;
+}
+
+.resultIndicator {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #798184;
+    margin-right: auto;
+    margin-left: 1rem;
+    margin-top: -0.5rem;
+}
+
+.recommendationGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.card {
+    background: #FFFFFF;
+    box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
+.title {
+    margin-left: 1rem;
+}
+
+.image {
+    border-radius: 10px;
+}
+
+.cocktailName {
+    font-weight: 700;
+    color: #0A191E;
+}
+
+.titleRecipe {
+    flex: 1
+}
+
+.titleRecipe > h1 {
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+}
+
+.titleHeader {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+.titleImage {
+    border-radius: 50%;
+    border: 1px solid rgba(32, 31, 32, 0.6);
+    padding: 4px;
+    position: absolute;
+    right: -0.5rem;
+}
+
+.titleImageRelative {
+    position: relative;
+    flex: 1;
+    height: 200px;
+}
+
+.titleCategory {
+    color: #828282;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.titleDescription {
+    color: #828282;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.divider {
+    width: 100px;
+    height: 1px;
+    background: #BDBDBD;
+    margin: 1.5rem 0;
+}
+
+.instructions {
+    padding: 2rem;
+    width: calc(100% + 2rem);
+    flex: 0.8;
+    background: #FFFFFF;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.instructionsTitle {
+    display: flex;
+    align-items: center;
+    color: #201F20;
+    margin-bottom: 1rem;
+}
+
+.instructionsTitle > h2 {
+    font-size: 18px;
+    margin: 0 0.5rem;
+}
+
+.instructionsList {
+    font-size: 14px;
+    color: #828282;
+    font-weight: 400;
+    margin: 5px 0 5px 0;
+}
+
+.instructionsParagraph {
+    font-size: 14px;
+    color: #828282;
+    font-weight: 400;
+}

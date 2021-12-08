@@ -1,35 +1,45 @@
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import Image from 'next/image'
-import client, { COCKTAIL_COLLECTIONS, DB_NAME } from "../../lib/db";
-import styles from "../../styles/Home.module.css";
 import Head from "next/head";
+import { ArrowLeftOutlined } from '@ant-design/icons'
+import client, { COCKTAIL_COLLECTIONS, DB_NAME } from "../../lib/db";
+import styles from "../../styles/Recommend.module.css";
 
 const RecommendPage = (props) => {
   const cocktail = JSON.parse(props.cocktail)
   const recommendedCocktails = JSON.parse(props.recommendedCocktails)
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Suggestions for {cocktail.name}</title>
+        <title>Recommendations for {cocktail.name}</title>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
 
       <main className={styles.main}>
-        <h2 className={styles.title}>
-          Suggestions for {cocktail.name}
-        </h2>
-        <div>
+        <div className={styles.backBar}>
+          <Link href="/">
+            <ArrowLeftOutlined/>
+          </Link>
+        </div>
+        <h1 className={styles.title}>
+          Cocktails similar to <br/>{cocktail.name}
+        </h1>
+        <span className={styles.resultIndicator}>
+          6 Results
+        </span>
+        <div className={styles.recommendationGrid}>
           {recommendedCocktails.map(({ name, image, cocktailDbId }) => (
             <Link key={name} href={`/recipe/${cocktailDbId}`} passHref>
-              <div>
+              <div className={styles.card}>
                 <Image
+                  className={styles.image}
                   src={image}
                   alt={name}
                   width={500}
                   height={500}
                 />
-                <span>{name} </span>
+                <span className={styles.cocktailName}>{name}</span>
               </div>
             </Link>
 
