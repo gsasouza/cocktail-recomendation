@@ -15,7 +15,7 @@ export default function Home({ cocktails }) {
   const [selected, setSelected] = React.useState(null);
   const options = JSON.parse(cocktails)
   const handleNavigate = () => {
-    if (selected) router.push(`/recommend/${selected}`)
+    router.push(`/recommend/${selected}`)
   }
   return (
     <div className={{ overflow: 'hidden' }}>
