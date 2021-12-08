@@ -11,7 +11,7 @@ const COCKTAIL_COLLECTIONS = 'cocktails'
 
 dotenv.config()
 
-const baseUrl = 'https://thecocktaildb.com/api/json/v1/1/search.php'
+const baseUrl = 'https://thecocktaildb.com/api/json/v2/9973533/search.php'
 
 const delay = ms => {
   return new Promise(resolve => {
